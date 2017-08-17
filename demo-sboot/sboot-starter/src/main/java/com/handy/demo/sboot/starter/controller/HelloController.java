@@ -1,25 +1,45 @@
 package com.handy.demo.sboot.starter.controller;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author longhairen
  * @create 2017/8/16 0016 上午 9:39
  */
-@Controller
+@RestController
+@RequestMapping("/hello")
 public class HelloController {
-    //从application中读取配置，如取不到默认值为hello jack
-    @Value("${application.hello:hello jack}")
-    private String hello;
 
-    @RequestMapping("/helloJsp")
-    public String helloJsp(Map<String, Object> map){
-        System.out.println("HelloController.helloJsp().hello="+hello);
-        map.put("hello", hello);
-        return "helloJsp";
+    @RequestMapping("/info")
+    public Map<String, String> getInfo(@RequestParam String name) {
+        Map<String, String> map = new HashMap<>();
+        map.put("name", name);
+        return map;
+    }
+
+    @RequestMapping("/list")
+    public List<Map<String, String>> getList() {
+        List<Map<String, String>> list = new ArrayList<>();
+        Map<String, String> map = null;
+        for (int i = 1; i <= 5; i++) {
+            map = new HashMap<>();
+            map.put("name", "Shanhy-" + i);
+            list.add(map);
+        }
+        return list;
+    }
+
+    @RequestMapping
+    public String hello() {
+        return "Hello Spring-Boot";
     }
 }
