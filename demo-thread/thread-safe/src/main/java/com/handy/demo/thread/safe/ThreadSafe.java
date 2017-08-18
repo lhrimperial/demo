@@ -1,6 +1,9 @@
 package com.handy.demo.thread.safe;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author longhairen
@@ -10,5 +13,7 @@ public class ThreadSafe {
     public static void main(String[] args){
         Integer integer = new Integer(0);
         AtomicInteger atomicInteger = new AtomicInteger();
+        ReentrantLock lock = new ReentrantLock();
+        BlockingQueue queue = new ArrayBlockingQueue(6);
     }
 }

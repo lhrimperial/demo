@@ -1,9 +1,7 @@
-package com.handy.demo.sboot.starter.controller;
+package com.handy.demo.sboot.web.contoller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -13,13 +11,18 @@ import java.util.Map;
 
 /**
  * @author longhairen
- * @create 2017/8/16 0016 上午 9:39
+ * @create 2017/8/17 0017 下午 3:25
  */
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
 
-    @RequestMapping("/info")
+    @RequestMapping
+    public String hello() {
+        return "Hello Spring-Boot";
+    }
+
+    @RequestMapping("/test")
     public Map<String, String> getInfo(@RequestParam String name) {
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
@@ -36,10 +39,5 @@ public class HelloController {
             list.add(map);
         }
         return list;
-    }
-
-    @RequestMapping
-    public String hello() {
-        return "Hello Spring-Boot";
     }
 }
