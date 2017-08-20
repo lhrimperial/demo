@@ -11,6 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ThreadSafe {
     public static void main(String[] args){
+        Thread thread = null;
         Integer integer = new Integer(0);
         AtomicInteger atomicInteger = new AtomicInteger();
         ReentrantLock lock = new ReentrantLock();
