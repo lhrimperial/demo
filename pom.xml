@@ -10,6 +10,7 @@
       <module>demo-thread</module>
     <module>demo-sboot</module>
       <module>demo-base</module>
+      <module>demo-web</module>
   </modules>
   <packaging>pom</packaging>
 

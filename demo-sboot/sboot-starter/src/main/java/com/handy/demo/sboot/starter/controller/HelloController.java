@@ -1,5 +1,7 @@
 package com.handy.demo.sboot.starter.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,17 @@ import java.util.Map;
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
+
+    private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
+
+    // 在方法中使用日志输出，如
+    @RequestMapping("/log")
+    public String logTest() {
+        logger.debug("日志输出测试 Debug");
+        logger.trace("日志输出测试 Trace");
+        logger.info("日志输出测试 Info");
+        return "successfully";
+    }
 
     @RequestMapping
     public String hello() {
