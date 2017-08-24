@@ -1,7 +1,6 @@
-package com.handy.demo.sboot.starter.servlet;
+package com.handy.demo.sboot.web.servlet;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +24,7 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(">>>>>>>>>>doPost()<<<<<<<<<<<");
+        System.out.println("########doPost()#############");
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
@@ -37,11 +36,6 @@ public class MyServlet extends HttpServlet {
         out.println("<h1>大家好，我的名字叫Servlet</h1>");
         out.println("</body>");
         out.println("</html>");
-    }
-
-    public static void main(String[] args){
-        System.out.println(184*1.2);
-        System.out.println(221-173);
     }
 
 }

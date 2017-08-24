@@ -12,7 +12,7 @@ import java.io.IOException;
  * 属性urlPatterns指定要过滤 的URL模式,也可使用属性value来声明.(指定要过滤的URL模式是必选属性)
  * @create 2017/8/21 0021 上午 9:30
  */
-@WebFilter(filterName = "myFilter", urlPatterns = "/*")
+//@WebFilter(filterName = "myFilter", urlPatterns = "/*")
 public class MyFilter implements Filter {
 
     @Override

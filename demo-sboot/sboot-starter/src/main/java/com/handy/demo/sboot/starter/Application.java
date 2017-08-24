@@ -1,10 +1,13 @@
 package com.handy.demo.sboot.starter;
 
+import com.handy.demo.sboot.starter.servlet.MyServlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.DispatcherServlet;
 
 /**
@@ -12,7 +15,7 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @create 2017/8/15 0015 下午 6:42
  */
 @SpringBootApplication
-//@ServletComponentScan
+@ComponentScan({"com.lvmama.boot","com.handy.demo"})
 public class Application {
 
     public static void main(String[] args) {
@@ -29,7 +32,7 @@ public class Application {
      *
      * @return
      */
-   /* @Bean
+ /*   @Bean
     public ServletRegistrationBean servletRegistrationBean() {
         return new ServletRegistrationBean(new MyServlet(), "/xs*//*");// ServletName默认值为首字母小写，即myServlet
     }*/

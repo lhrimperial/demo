@@ -11,6 +11,7 @@
     <module>demo-sboot</module>
       <module>demo-base</module>
       <module>demo-web</module>
+      <module>demo-spring</module>
   </modules>
   <packaging>pom</packaging>
 

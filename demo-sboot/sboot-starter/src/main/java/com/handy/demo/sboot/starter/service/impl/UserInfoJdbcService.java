@@ -1,6 +1,7 @@
-package com.handy.demo.sboot.starter.service;
+package com.handy.demo.sboot.starter.service.impl;
 
 import com.handy.demo.sboot.starter.domain.UserInfo;
+import com.handy.demo.sboot.starter.service.IUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,8 +15,8 @@ import java.util.List;
  * @author longhairen
  * @create 2017/8/21 0021 上午 10:19
  */
-@Service
-public class UserInfoJdbcService implements IUserInfoJdbcService {
+@Service("userInfoJdbcService")
+public class UserInfoJdbcService implements IUserInfoService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

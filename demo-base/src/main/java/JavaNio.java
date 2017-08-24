@@ -1,5 +1,3 @@
-package com.handy.demo.thread.safe;
-
 import java.nio.ByteBuffer;
 
 /**

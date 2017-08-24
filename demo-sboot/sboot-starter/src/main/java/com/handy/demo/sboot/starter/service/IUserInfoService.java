@@ -8,7 +8,7 @@ import java.util.List;
  * @author longhairen
  * @create 2017/8/21 0021 上午 10:19
  */
-public interface IUserInfoJdbcService {
+public interface IUserInfoService {
 
     UserInfo findUserInfo(int id);
 

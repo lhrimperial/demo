@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @author longhairen
  * @create 2017/8/21 0021 上午 9:52
  */
-@Component
+//@Component
 public class MyStartupRunner1 implements CommandLineRunner {
 
     @Override
