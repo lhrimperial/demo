@@ -1,7 +1,12 @@
 package com.handy.demo.thread.safe;
 
+import org.apache.kafka.clients.producer.internals.FutureRecordMetadata;
+import scala.tools.nsc.settings.Final;
+
 import java.io.File;
 import java.io.FileFilter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,14 +16,178 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @create 2017/8/24 0024 下午 7:59
  */
 public class ThreadPoolLean {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
 //        testNewFixedThreadPool();
 //        testThreadPoolExecutor();
-        testBlockingDequeAndAtomic();
+//        testBlockingDequeAndAtomic();
+//        testSameRunnable();
+//        testCountDownLatch();
+//        testCallableAndFuture1();
+//        testCompletionService();
+        testSemaphore();
     }
 
-    public static long randomTime(){
-        return (long) (Math.random() * 1000);
+    /**
+     * Semaphore信号量 拿到信号量的线程可以进入代码，否则就等待。
+     * 通过acquire()和release()获取和释放访问许可。下面的例子只允许5个线程同时进入执行acquire()和release()之间的代码
+     * @throws Exception
+     */
+    public static void testSemaphore() throws Exception {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        final Semaphore sema = new Semaphore(5);
+
+        for (int i = 0; i < 20; i++){
+            final int NO = i;
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        sema.acquire();
+                        System.out.println(Thread.currentThread().getName() + " Accessing " + NO);
+                        Thread.sleep((long) (Math.random()*50000));
+                        sema.release();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            exec.execute(runnable);
+        }
+        exec.shutdown();
+    }
+
+    /**
+     * 它会首先取完成任务的线程
+     * @throws Exception
+     */
+    public static void testCompletionService() throws Exception {
+        ExecutorService exec = Executors.newFixedThreadPool(10);
+        CompletionService<String> serv =
+                new ExecutorCompletionService<String>(exec);
+        for (int index = 0; index < 5; index++) {
+            final int NO = index;
+            Callable<String> downImg = new Callable<String>() {
+                public String call() throws Exception {
+                    Thread.sleep((long) (Math.random() * 10000));
+                    return "Downloaded Image " + NO;
+                }
+            };
+            serv.submit(downImg);
+        }
+        Thread.sleep(1000 * 2);
+        System.out.println("Show web content");
+        for (int index = 0; index < 5; index++) {
+            Future<String> task = serv.take();
+            String img = task.get();
+            System.out.println(img);
+        }
+        System.out.println("End");
+        // 关闭线程池
+        exec.shutdown();
+    }
+
+    /**
+     * 使用Callable和Future实现线程等待和多线程返回值
+     * @throws Exception
+     */
+    public static void testCallableAndFuture1() throws Exception {
+        System.out.println("start main thread");
+        int threadCount = 5;
+        final ExecutorService exec = Executors.newFixedThreadPool(threadCount);
+        List<Future<Integer>> tasks = new ArrayList<>(threadCount);
+        for (int i = 0; i < threadCount; i++){
+            Callable<Integer> call = new Callable<Integer>() {
+                @Override
+                public Integer call() throws Exception {
+                    System.out.println(Thread.currentThread().getName());
+                    Thread.sleep(1000);
+                    return 1;
+                }
+            };
+            tasks.add(exec.submit(call));
+        }
+        long total = 0;
+        for (Future<Integer> future : tasks) {
+            total += future.get();
+        }
+        exec.shutdown();
+        System.out.println("total: " + total);
+        System.out.println("end main thread");
+    }
+
+    public static void testCallableAndFuture() throws Exception {
+        System.out.println("start main thread");
+        final ExecutorService exec = Executors.newFixedThreadPool(5);
+        Callable<String> call = new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                System.out.println("start new thread " + Thread.currentThread().getName());
+                Thread.sleep((long) (Math.random()*1000));
+                System.out.println("end new thread " + Thread.currentThread().getName());
+                return "Some Value";
+            }
+        };
+       for (int i = 0; i < 10; i++){
+           Future<String> task = exec.submit(call);
+           //Thread.sleep(1000*2);
+           // 阻塞，并待子线程结束，
+           System.out.println(task.get().toString());
+       }
+        exec.shutdown();
+        exec.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+        System.out.println("end main thread");
+    }
+
+    public static void testCountDownLatch() throws Exception{
+        final CountDownLatch begin = new CountDownLatch(1);
+        final CountDownLatch end = new CountDownLatch(10);
+
+        ExecutorService exec = Executors.newFixedThreadPool(10);
+
+        for (int i = 0; i < 10; i++){
+            final int NO = i + 1;
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        begin.await();
+                        Thread.sleep((long) (Math.random()*1000));
+                        System.out.println("No." + NO + " arrived");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }finally {
+                        end.countDown();
+                    }
+                }
+            };
+            exec.submit(runnable);
+        }
+        System.out.println("Game Start!");
+        begin.countDown();
+        end.await();
+        System.out.println("Game Over");
+        exec.shutdown();
+    }
+
+    public static void testSameRunnable() throws Exception{
+        ExecutorService service = Executors.newFixedThreadPool(5);
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    System.out.println(Thread.currentThread().getName());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        for (int i = 0; i < 20; i++) {
+            service.execute(runnable);
+        }
+        service.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+        service.shutdown();
+        System.out.println("runnable complete!");
     }
 
     public static void testBlockingDequeAndAtomic() throws Exception {
@@ -78,7 +247,7 @@ public class ThreadPoolLean {
                                 queue.put(exitFile);
                                 break;
                             }
-                            System.out.println(threadName + ": " + index + " " + file.getPath());
+                            System.out.println(threadName + ": " + index + " " + Thread.currentThread().getName() + " " + file.getPath());
                         } catch (InterruptedException e) {
                         }
                     }
@@ -108,6 +277,10 @@ public class ThreadPoolLean {
             });
         }
         executor.shutdown();
+    }
+
+    public static long randomTime(){
+        return (long) (Math.random() * 1000);
     }
 
     public static void testNewFixedThreadPool() throws Exception{

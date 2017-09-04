@@ -1,11 +1,13 @@
 package com.handy.demo.sboot.starter.config;
 
+import com.lvmama.boot.druid.config.DataSourceConfiguration;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -20,6 +22,7 @@ import java.util.Properties;
  */
 @Configuration
 @MapperScan(value = "com.handy.demo.sboot.starter.mapper")
+@Import(DataSourceConfiguration.class)
 public class DatabaseConfigure {
 
     @Autowired

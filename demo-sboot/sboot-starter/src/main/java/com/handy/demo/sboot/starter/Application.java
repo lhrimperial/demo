@@ -13,9 +13,10 @@ import org.springframework.web.servlet.DispatcherServlet;
 /**
  * @author longhairen
  * @create 2017/8/15 0015 下午 6:42
+ * "com.lvmama.boot",
  */
 @SpringBootApplication
-@ComponentScan({"com.lvmama.boot","com.handy.demo"})
+//@ComponentScan({"com.handy.demo"})
 public class Application {
 
     public static void main(String[] args) {
