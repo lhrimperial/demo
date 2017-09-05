@@ -12,6 +12,7 @@
       <module>demo-base</module>
       <module>demo-web</module>
       <module>demo-spring</module>
+      <module>demo-distribute</module>
   </modules>
   <packaging>pom</packaging>
 
