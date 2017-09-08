@@ -1,6 +1,7 @@
 package com.handy.demo.distribute.lock.test;
 
 import com.handy.demo.distribute.lock.locker.RedisDistributedLock;
+import com.handy.frame.util.StringUtils;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
@@ -52,9 +53,19 @@ class Service {
 
     public void seckill() {
         // 返回锁的value值，供释放锁时候进行判断
-        String indentifier = lock.lockWithTimeout("resource", 5000, 1000);
-        System.out.println(Thread.currentThread().getName() + "获得了锁");
-        System.out.println(--n);
-        lock.releaseLock("resource", indentifier);
+        String indentifier = lock.lockWithTimeout("resource", 1000, 1000);
+        if (StringUtils.isNotBlank(indentifier)) {
+            System.out.println(Thread.currentThread().getName() + "获得了锁，value：" + indentifier);
+            System.out.println(--n);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            lock.releaseLock("resource", indentifier);
+            System.out.println(Thread.currentThread().getName()+"释放了锁");
+        }else {
+            System.out.println(Thread.currentThread().getName() + "没有获得锁，结束退出");
+        }
     }
 }
