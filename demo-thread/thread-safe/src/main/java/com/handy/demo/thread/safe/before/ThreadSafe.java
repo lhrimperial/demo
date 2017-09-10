@@ -1,4 +1,6 @@
-package com.handy.demo.thread.safe;
+package com.handy.demo.thread.safe.before;
+
+import scala.concurrent.util.Unsafe;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -12,6 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ThreadSafe {
     public static void main(String[] args){
+        Unsafe unsafe = null;
         Thread thread = null;
         Integer integer = new Integer(0);
         AtomicInteger atomicInteger = new AtomicInteger();

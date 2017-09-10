@@ -1,4 +1,4 @@
-package com.handy.demo.distribute.weba.cotroller;
+package com.handy.demo.distribute.weba.controller;
 
 import com.handy.demo.distribute.weba.domain.Address;
 import com.handy.demo.distribute.weba.domain.UserInfo;
@@ -27,7 +27,7 @@ public class UserInfoController {
     private IdistributeService distributeService;
 
     @RequestMapping("/save")
-    public boolean saveUserInfo(){
+    public @ResponseBody boolean saveUserInfo(){
         UserInfo userInfo = new UserInfo();
         userInfo.setUserName("zhangqing");
         userInfo.setPassWord("12345");

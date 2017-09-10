@@ -1,3 +1,5 @@
+package com.handy.demo.base.io;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -9,5 +11,6 @@ public class JavaNio {
 
     public static void main(String[] args) {
         ByteBuffer buffer=ByteBuffer.allocate(1024);
+        ByteBuffer.allocateDirect(1024);
     }
 }

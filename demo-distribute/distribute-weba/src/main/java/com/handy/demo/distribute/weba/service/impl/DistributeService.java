@@ -5,11 +5,14 @@ import com.handy.demo.distribute.weba.mapper.master.UserInfoMapper;
 import com.handy.demo.distribute.weba.mapper.slave.AddressMapper;
 import com.handy.demo.distribute.weba.service.IdistributeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author longhairen
  * @create 2017/9/8 0008 下午 6:06
  */
+@Service
 public class DistributeService implements IdistributeService {
 
     @Autowired
@@ -19,6 +22,7 @@ public class DistributeService implements IdistributeService {
     private AddressMapper addressMapper;
 
     @Override
+    @Transactional
     public boolean save(UserInfo userInfo) {
         boolean isSave = false;
         if (userInfoMapper.saveUserInfo(userInfo) != 1) {

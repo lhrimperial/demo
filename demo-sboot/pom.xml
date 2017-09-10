@@ -11,7 +11,7 @@
     <artifactId>demo-sboot</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>sboot-starter</module>
+        <!--<module>sboot-starter</module>-->
     </modules>
 
     <distributionManagement>

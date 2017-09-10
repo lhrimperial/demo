@@ -1,4 +1,4 @@
-package com.handy.demo.thread.safe;
+package com.handy.demo.thread.safe.before;
 
 /**
  * @author longhairen

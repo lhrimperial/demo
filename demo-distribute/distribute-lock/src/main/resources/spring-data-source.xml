@@ -36,7 +36,7 @@
                 <prop key="initialSize">0</prop>
                 <prop key="maxActive">20</prop>
                 <prop key="minIdle">0</prop>
-                <!--<prop key="maxWait">60000</prop>-->
+                <prop key="maxWait">60000</prop>
                 <prop key="validationQuery">${validationQuery}</prop>
                 <prop key="testOnBorrow">false</prop>
                 <prop key="testOnReturn">false</prop>
@@ -59,7 +59,7 @@
                 <prop key="initialSize">0</prop>
                 <prop key="maxActive">20</prop>
                 <prop key="minIdle">0</prop>
-                <!--<prop key="maxWait">60000</prop>-->
+                <prop key="maxWait">60000</prop>
                 <prop key="validationQuery">${validationQuery}</prop>
                 <prop key="testOnBorrow">false</prop>
                 <prop key="testOnReturn">false</prop>
@@ -93,88 +93,25 @@
     </bean>
 
     <!-- atomikos事务管理器 -->
-    <!-- 事务配置 -->
-    <bean id="userTransactionService" class="com.atomikos.icatch.config.UserTransactionServiceImp"
-          init-method="init" destroy-method="shutdownForce">
-        <constructor-arg>
-            <props>
-                <prop key="com.atomikos.icatch.service">com.atomikos.icatch.standalone.UserTransactionServiceFactory
-                </prop>
-            </props>
-        </constructor-arg>
+    <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager" init-method="init" destroy-method="close">
+        <property name="forceShutdown">
+            <value>true</value>
+        </property>
     </bean>
 
-    <bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager"
-          init-method="init" destroy-method="close" depends-on="userTransactionService">
-        <property name="forceShutdown" value="false" />
-    </bean>
-    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp"
-          depends-on="userTransactionService">
+    <bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp">
         <property name="transactionTimeout" value="300" />
     </bean>
-    <bean id="jtaTransactionManager"
-          class="org.springframework.transaction.jta.JtaTransactionManager"
-          depends-on="userTransactionService">
+    <!-- spring 事务管理器 -->
+    <bean id="springTransactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
         <property name="transactionManager" ref="atomikosTransactionManager" />
         <property name="userTransaction" ref="atomikosUserTransaction" />
+        <!-- 必须设置，否则程序出现异常 JtaTransactionManager does not support custom isolation levels by default -->
+        <property name="allowCustomIsolationLevels" value="true"/>
     </bean>
 
-    <tx:annotation-driven transaction-manager="jtaTransactionManager" proxy-target-class="true"/>
-
-    <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
-
-    <!--<tx:advice id="txAdvice" transaction-manager="jtaTransactionManager">-->
-        <!--<tx:attributes>-->
-            <!--<tx:method name="insert*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="save*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="add*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="create*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="update*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="edit*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="delete*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="remove*" propagation="REQUIRED"/>-->
-            <!--<tx:method name="get*" read-only="true"/>-->
-            <!--<tx:method name="find*" read-only="true"/>-->
-            <!--<tx:method name="query*" read-only="true"/>-->
-            <!--<tx:method name="*" propagation="SUPPORTS" read-only="true"/>-->
-        <!--</tx:attributes>-->
-    <!--</tx:advice>-->
-    <!--<aop:config>-->
-        <!--<aop:pointcut id="leePointcut"-->
-                      <!--expression="execution(* com.handy.*.service.Impl.*(..)) "/>-->
-        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="leePointcut"/>-->
-    <!--</aop:config>-->
-
-
-
-
-
-
-
-
-    <!--<bean id="atomikosTransactionManager" class="com.atomikos.icatch.jta.UserTransactionManager" init-method="init" destroy-method="close">-->
-        <!--<property name="forceShutdown">-->
-            <!--<value>true</value>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-    <!--<bean id="atomikosUserTransaction" class="com.atomikos.icatch.jta.UserTransactionImp">-->
-        <!--<property name="transactionTimeout" value="300" />-->
-    <!--</bean>-->
-    <!-- spring 事务管理器 -->
-    <!--<bean id="springTransactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">-->
-        <!--<property name="transactionManager" ref="atomikosTransactionManager" />-->
-        <!--<property name="userTransaction" ref="atomikosUserTransaction" />-->
-        <!--&lt;!&ndash; 必须设置，否则程序出现异常 JtaTransactionManager does not support custom isolation levels by default &ndash;&gt;-->
-        <!--<property name="allowCustomIsolationLevels" value="true"/>-->
-    <!--</bean>-->
-
-    <!--声明事务注解支持-->
-    <!--<tx:annotation-driven transaction-manager="springTransactionManager"/>-->
-
-
-<!--    <aop:config  proxy-target-class="true">
-        <aop:advisor pointcut="(execution(* com.handy.*.service.*(..)))" advice-ref="txAdvice" />
+    <aop:config  proxy-target-class="true">
+        <aop:advisor pointcut="(execution(* com.handy.*.service.*.* (..)))" advice-ref="txAdvice" />
     </aop:config>
 
     <tx:advice id="txAdvice" transaction-manager="springTransactionManager">
@@ -184,6 +121,6 @@
             <tx:method name="insert*"  propagation="REQUIRED" rollback-for="java.lang.Exception" />
             <tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
         </tx:attributes>
-    </tx:advice>-->
+    </tx:advice>
 
 </beans>

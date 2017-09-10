@@ -1,13 +1,8 @@
-package com.handy.demo.thread.safe;
-
-import org.apache.kafka.clients.producer.internals.FutureRecordMetadata;
-import scala.tools.nsc.settings.Final;
+package com.handy.demo.thread.safe.before;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -238,7 +233,7 @@ public class ThreadPoolLean {
                 public void run() {
                     while (true) {
                         try {
-                            Thread.sleep(randomTime());
+                            Thread.sleep(1000);
                             int index = wc.incrementAndGet();
                             File file = queue.take();
                             // 队列已经无对象
@@ -247,7 +242,7 @@ public class ThreadPoolLean {
                                 queue.put(exitFile);
                                 break;
                             }
-                            System.out.println(threadName + ": " + index + " " + Thread.currentThread().getName() + " " + file.getPath());
+                            System.out.println(threadName + ": " + index + " " + file.getPath());
                         } catch (InterruptedException e) {
                         }
                     }
@@ -277,10 +272,6 @@ public class ThreadPoolLean {
             });
         }
         executor.shutdown();
-    }
-
-    public static long randomTime(){
-        return (long) (Math.random() * 1000);
     }
 
     public static void testNewFixedThreadPool() throws Exception{

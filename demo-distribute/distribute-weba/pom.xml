@@ -19,6 +19,8 @@
                     <path>/weba</path>
                     <port>8081</port>
                     <uriEncoding>utf-8</uriEncoding>
+                    <username>admin</username>
+                    <password>admin</password>
                 </configuration>
             </plugin>
         </plugins>

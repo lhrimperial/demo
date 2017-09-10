@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.handy.demo.distribute.weba.mapper.slave.AddressMapper">
 
-    <insert id="save" parameterType="com.handy.demo.distribute.weba.domain.Address">
+    <insert id="save" parameterType="com.handy.demo.distribute.weba.domain.Address"
+    useGeneratedKeys="true" keyProperty="id">
         insert into t_address_info(user_id,address_name,notes) values(#{userId},#{addressName},#{notes})
     </insert>
 
