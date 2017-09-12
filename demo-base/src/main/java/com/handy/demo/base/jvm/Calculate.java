@@ -24,16 +24,19 @@ public class Calculate {
                 +3312.70 +2091.27 +3312.70 +5988.95 +3312.70   +3312.70 +2900 +2900 +2900;
         double kaxing = 3262.97+10421.40+10359.56+10359.56+1655;
         double hongwang = 8257+12114.99+11914+13193+13593.53+13593.53+13593.53+13593.53+13590+2853;
-        double lvmama = 6680+12102.5+12095+12443;
-        double xinagmu = 19700;
+        double lvmama = 6680+12102.5+12095+12443+16227;
+        double hw2017 = 13593.53+13593.53+13593.53+13590+2853;
+        double qb2017 = 7000+12488+11206+4644-2000;
+        double xiangmu = 19700;
         double qianbao = 2480+4250+5811+3233+1297.5+4193+7000+12488+11206+4644-2000;
+        System.out.println("sum2017：" + (hw2017+qb2017+lvmama) + "  salary: " + (hw2017+lvmama) + "  qb2017:  " + qb2017);
         System.out.println("huayu：" + huayu);
         System.out.println("kaxing：" + kaxing);
         System.out.println("hongwang：" + hongwang);
         System.out.println("lvmama：" + lvmama);
-        System.out.println("xinagmu：" + xinagmu);
+        System.out.println("xiangmu：" + xiangmu);
         System.out.println("qianbao：" + qianbao);
-        System.out.println("total: " + (huayu+kaxing+hongwang+lvmama+xinagmu+qianbao));
+        System.out.println("total: " + (huayu+kaxing+hongwang+lvmama+xiangmu+qianbao));
     }
 
     /**
