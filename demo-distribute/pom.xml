@@ -13,8 +13,8 @@
     <modules>
         <module>distribute-weba</module>
         <module>distribute-webb</module>
-        <module>distribute-webc</module>
         <module>distribute-lock</module>
+        <module>distribute-webc</module>
     </modules>
 
     <properties>

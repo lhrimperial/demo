@@ -1,23 +1,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <artifactId>demo-distribute</artifactId>
+        <artifactId>distribute-webc</artifactId>
         <groupId>com.handy.demo</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.handy.demo</groupId>
-    <artifactId>distribute-webb</artifactId>
+    <artifactId>webc-dubbo-provider</artifactId>
     <packaging>war</packaging>
-
+    <name>webc-dubbo-provider Maven Webapp</name>
+    <url>http://maven.apache.org</url>
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/com.alibaba.rocketmq/rocketmq-client -->
         <dependency>
-            <groupId>com.alibaba.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
-            <version>3.2.6</version>
+            <groupId>com.handy.demo</groupId>
+            <artifactId>webc-dubbo-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
-
     </dependencies>
     <build>
         <plugins>
@@ -26,12 +25,12 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <path>/webb</path>
-                    <port>8082</port>
+                    <path>/webc-provider</path>
+                    <port>8081</port>
                     <uriEncoding>utf-8</uriEncoding>
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>distribute-webb</finalName>
+        <finalName>webc-dubbo-provider</finalName>
     </build>
 </project>
