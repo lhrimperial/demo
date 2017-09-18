@@ -1,4 +1,4 @@
-package com.handy.demo.base.jvm;
+package com.handy.demo;
 
 
 public class Calculate {
