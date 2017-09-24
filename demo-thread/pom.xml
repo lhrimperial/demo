@@ -14,6 +14,7 @@
         <module>thread-dislock</module>
         <module>thread-genid</module>
         <module>thread-safe</module>
+        <module>thread-base</module>
     </modules>
 
 

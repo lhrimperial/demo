@@ -50,7 +50,7 @@ public class Calculate {
         System.out.println("salary:"+salary);
         System.out.println("income:"+income);
 
-        double other = 1420+609+669+850+2684+654+10000+6800+4800;
+        double other = 1420+609+669+850+2684+654+10000+6800+4800+298+5160;
         System.out.println("other:"+other);
         double phone = 3699;
         double fangzu = 3600+3600;
