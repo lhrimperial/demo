@@ -67,6 +67,7 @@
     <!--Mybatis 配置-->
     <bean id="sqlSessionFactoryMaster" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="configLocation" value="classpath:mybatis.xml"/>
+        <property name="mapperLocations" value="classpath*:com/handy/**/*Mapper.xml"/>
         <property name="dataSource" ref="masterDataSource"/>
     </bean>
 

@@ -1,4 +1,4 @@
-package com.handy.demo.thread.base.chapter02;
+package com.handy.demo.thread.base.chapter02.part02;
 
 /**
  * @author longhairen
