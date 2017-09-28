@@ -1,6 +1,4 @@
-package com.handy.demo.thread.base.chapter03.part01;
-
-import com.handy.demo.thread.base.chapter02.part03.ThreadGroupName;
+package com.handy.demo.thread.base.chapter03.part1;
 
 import java.util.concurrent.locks.ReentrantLock;
 

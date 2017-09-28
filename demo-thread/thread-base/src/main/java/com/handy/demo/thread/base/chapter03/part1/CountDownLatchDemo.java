@@ -1,4 +1,4 @@
-package com.handy.demo.thread.base.chapter03.part05;
+package com.handy.demo.thread.base.chapter03.part1;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;

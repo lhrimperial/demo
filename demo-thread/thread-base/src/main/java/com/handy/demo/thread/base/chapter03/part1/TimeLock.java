@@ -1,6 +1,4 @@
-package com.handy.demo.thread.base.chapter03.part01;
-
-import org.omg.PortableServer.THREAD_POLICY_ID;
+package com.handy.demo.thread.base.chapter03.part1;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;

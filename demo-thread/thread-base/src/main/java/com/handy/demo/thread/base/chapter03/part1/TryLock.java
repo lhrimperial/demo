@@ -1,4 +1,4 @@
-package com.handy.demo.thread.base.chapter03.part01;
+package com.handy.demo.thread.base.chapter03.part1;
 
 import java.util.concurrent.locks.ReentrantLock;
 
