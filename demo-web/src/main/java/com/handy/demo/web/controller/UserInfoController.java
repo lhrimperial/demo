@@ -31,4 +31,5 @@ public class UserInfoController {
     List<UserInfo> findUserList(){
         return userInfoService.findUserList();
     }
+
 }

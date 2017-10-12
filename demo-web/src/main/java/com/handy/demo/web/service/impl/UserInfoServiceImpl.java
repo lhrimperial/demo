@@ -33,4 +33,5 @@ public class UserInfoServiceImpl implements IUserInfoService {
     public List<UserInfo> findUserList() {
         return userInfoMapper.findUserList();
     }
+
 }
