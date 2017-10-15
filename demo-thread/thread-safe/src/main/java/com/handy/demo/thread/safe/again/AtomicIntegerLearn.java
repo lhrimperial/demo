@@ -11,5 +11,6 @@ public class AtomicIntegerLearn {
     public static void main(String[] args){
         AtomicInteger count = new AtomicInteger(1);
         Thread thread = new Thread();
+        Integer integer = 1;
     }
 }

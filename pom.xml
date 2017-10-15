@@ -13,10 +13,12 @@
       <module>demo-web</module>
       <module>demo-spring</module>
       <module>demo-distribute</module>
+      <module>demo-algorithm</module>
       <module>demo-activemq</module>
       <module>demo-activemq</module>
       <module>demolts</module>
       <module>demo-lts</module>
+      <module>demo-rocketmq</module>
   </modules>
   <packaging>pom</packaging>
 

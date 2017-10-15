@@ -1,20 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
         <artifactId>demo</artifactId>
         <groupId>com.handy.demo</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.handy.demo</groupId>
-    <artifactId>demo-activemq</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>activemq-consumer</module>
-        <module>activemq-producer</module>
-    </modules>
-
+    <artifactId>demo-rocketmq</artifactId>
+    <packaging>war</packaging>
     <properties>
         <servlet-version>2.5</servlet-version>
         <jsp-version>2.0</jsp-version>
@@ -75,6 +68,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.alibaba.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>3.2.3</version>
+        </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
@@ -532,5 +530,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>demo-rocketmq</finalName>
     </build>
 </project>

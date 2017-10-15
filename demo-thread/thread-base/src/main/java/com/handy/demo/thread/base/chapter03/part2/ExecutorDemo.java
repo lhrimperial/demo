@@ -16,5 +16,6 @@ public class ExecutorDemo {
         ThreadFactory threadFactory = null;
         ForkJoinPool forkJoinPool = null;
         ForkJoinTask forkJoinTask = null;
+        ConcurrentLinkedDeque concurrentLinkedDeque = null;
     }
 }

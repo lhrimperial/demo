@@ -8,8 +8,8 @@ package com.handy.demo.thread.base.chapter02.part02;
 public class ThreadInterrupted {
 
     public static void main(String[] args) throws Exception{
-//        interrupt1();
-        interrupt2();
+        interrupt1();
+//        interrupt2();
     }
 
     public static void interrupt2() throws Exception{
@@ -27,6 +27,7 @@ public class ThreadInterrupted {
                         System.out.println("Interrupted when sleep!");
                         Thread.currentThread().interrupt();
                     }
+                    System.out.println("Thread yield");
                     Thread.yield();
                 }
             }
@@ -52,7 +53,7 @@ public class ThreadInterrupted {
         };
 
         thread.start();
-        Thread.sleep(5000);
+        Thread.sleep(1000);
         thread.interrupt();
     }
 }
