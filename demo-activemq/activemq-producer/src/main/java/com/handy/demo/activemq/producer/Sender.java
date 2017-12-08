@@ -27,7 +27,7 @@ public class Sender {
         connectionFactory = new ActiveMQConnectionFactory(
                 ActiveMQConnection.DEFAULT_USER,
                 ActiveMQConnection.DEFAULT_PASSWORD,
-                "tcp://localhost:61616");
+                "failover://(tcp://192.168.157.129:61616,tcp://192.168.157.130:61617)?randomize=false");
         try {
             // 构造从工厂得到连接对象
             connection = connectionFactory.createConnection();
