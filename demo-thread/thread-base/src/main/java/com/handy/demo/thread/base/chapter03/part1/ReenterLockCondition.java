@@ -27,7 +27,7 @@ public class ReenterLockCondition implements Runnable {
         }
     }
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         ReenterLockCondition lockCondition = new ReenterLockCondition();
         Thread t1 = new Thread(lockCondition);
         t1.start();
