@@ -16,7 +16,6 @@
       <module>demo-algorithm</module>
       <module>demo-activemq</module>
       <module>demo-activemq</module>
-      <module>demolts</module>
       <module>demo-lts</module>
       <module>demo-rocketmq</module>
   </modules>
